@@ -1,0 +1,33 @@
+<div>
+  <p>
+  <select name="country" id="country" (click)="chooseCountry($event)">
+    <option value="select">select</option>
+    <option *ngFor="let country of countries" [value]="country.countryId" >
+      {{country.countryName}}
+    </option>
+  </select>
+</p>
+</div>
+
+<div>
+  <p>
+    <select name="state" id="state" (click)="chooseState($event)">
+      <option value="select">select</option>
+      <option *ngFor="let state of selectedCountrysStates" [value]="state.stateId" >
+        {{state.stateName}}
+      </option>
+    </select>
+  </p>
+  </div>
+
+  <div>
+      <p>
+        <select name="city" id="city">
+          <option value="select">select</option>
+          <option *ngFor="let city of selectedStatesCities" [value]="city.cityId" >
+            {{city.cityName}}
+          </option>
+        </select>
+      </p>
+      </div>
+

@@ -1,33 +1,55 @@
-<div>
-  <p>
-  <select name="country" id="country" (click)="chooseCountry($event)">
-    <option value="select">select</option>
-    <option *ngFor="let country of countries" [value]="country.countryId" >
-      {{country.countryName}}
-    </option>
-  </select>
-</p>
-</div>
-
-<div>
-  <p>
-    <select name="state" id="state" (click)="chooseState($event)">
+<form (ngSubmit) = "onSubmit(f.value)" #f = "ngForm"> 
+  <div>
+    <label for="name">Name</label>
+    <input type="text" name = "name" [(ngModel)] = "filler.name">
+  </div>
+  <div>
+    <p>
+    <select name="country" id="country" [(ngModel)] = "filler.country" (click)="chooseCountry()">
       <option value="select">select</option>
-      <option *ngFor="let state of selectedCountrysStates" [value]="state.stateId" >
-        {{state.stateName}}
+      <option *ngFor="let country of countries" [value]="country.countryId" >
+        {{country.countryName}}
       </option>
     </select>
   </p>
   </div>
-
+  
   <div>
-      <p>
-        <select name="city" id="city">
-          <option value="select">select</option>
-          <option *ngFor="let city of selectedStatesCities" [value]="city.cityId" >
-            {{city.cityName}}
-          </option>
-        </select>
-      </p>
-      </div>
+    <p>
+      <select name="state" id="state" [(ngModel)] = "filler.state" (click)="chooseState()">
+        <option value="select">select</option>
+        <option *ngFor="let state of selectedCountrysStates" [value]="state.stateId" >
+          {{state.stateName}}
+        </option>
+      </select>
+    </p>
+    </div>
+  
+    <div>
+        <p>
+          <select name="city" id="city" [(ngModel)] = "filler.city">
+            <option value="select">select</option>
+            <option *ngFor="let city of selectedStatesCities" [value]="city.cityId" >
+              {{city.cityName}}
+            </option>
+          </select>
+        </p>
+        </div>
+        <div>
+          <button>Submit</button>
+        </div>
+</form>
 
+<ul *ngFor = "let filler of fillers let i = index">  
+  <li>{{ filler.name }}</li>
+  <li>{{ filler.country.countryName }}</li>
+  <li>{{ filler.state.stateName }}</li>
+  <li> {{ filler.city.cityName }} </li>
+  <button (click) = "onEdit(filler, i)">Edit</button>
+  <button (click) = "onDelete(i)">Delele</button>
+</ul>
+
+
+  <!-- <ul *ngFor = "let a of arr">
+   <li>{{ a }}</li>
+  </ul>     -->
